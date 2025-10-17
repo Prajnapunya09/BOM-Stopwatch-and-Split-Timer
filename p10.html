@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch - BOM Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    .btns button {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+
+    .btns button:disabled {
+      background-color: rgb(244, 244, 244);
+      border: 2px solid rgb(204, 204, 204);
+      cursor: not-allowed;
+      color: rgb(187, 187, 187);
+    }
+
+    .btns .start {
+      background-color: rgb(78, 185, 185);
+      color: white;
+      border: 2px solid transparent;
+    }
+
+    .btns .split {
+      background-color: orange;
+      color: white;
+      border: 2px solid transparent;
+    }
+
+    .btns .reset {
+      background-color: rgb(240, 84, 49);
+      color: white;
+      border: 2px solid transparent;
+    }
+
+    .result {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .result span {
+      display: block;
+      min-width: 100px;
+    }
+
+    table {
+      width: 80% !important;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="p-4 text-center" style="background-color: rgb(253, 221, 226);">
+      <h1 class="display-1 fw-bold result">
+        <span id="hrs">00</span>:<span id="min">00</span>:<span id="seconds">00</span>.<span id="millisec">0</span>
+        <small id="helper" style="font-size: 2rem !important; display: block;">00</small>
+      </h1>
+    </div>
+    <h1 class="text-warning display-4 fw-bold">SPLIT TIME</h1>
+
+    <form class="btns d-flex gap-3 mt-4">
+      <button class="start" type="button" onclick="startTimehandler()">Start</button>
+      <button class="split" type="button" disabled onclick="splitValueHandler()">Split</button>
+      <button class="reset" type="button" disabled onclick="resetHandler()">Reset</button>
+    </form>
+
+    <br>
+
+    <p class="d-flex justify-content-end">
+      <span>
+        <input type="checkbox" onclick="reverseHandler()">
+        Reverse
+      </span>
+    </p>
+
+    <table id="table" class="table striped" width="80%" align="center">
+      <thead>
+        <tr class="bg-primary text-white">
+          <th>SI.No</th>
+          <th>Interval</th>
+          <th>Total</th>
+          <th>Time Recorded</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // DOM Elements
+    const hrsTag = document.getElementById('hrs');
+    const minTag = document.getElementById('min');
+    const secondsTag = document.getElementById('seconds');
+    const milliSecondsTag = document.getElementById('millisec');
+    const helperTag = document.getElementById('helper');
+
+    const startBtn = document.querySelector('.start');
+    const splitBtn = document.querySelector('.split');
+    const resetBtn = document.querySelector('.reset');
+    const tbody = document.getElementById('tbody');
+    const table = document.getElementById("table");
+
+    let hours = 0, minutes = 0, seconds = 0, milliseconds = 0, helpertime = 0;
+    let isStarted = false;
+    let timeOperation;
+    let isPlaying = false;
+    let isReversed = false;
+    let splittedValues = [];
+
+    // Hide table initially
+    table.style.visibility = "hidden";
+
+    function startTimehandler() {
+      isStarted = !isStarted;
+
+      if (isStarted) {
+        isPlaying = true;
+        startBtn.innerText = "Pause";
+        startBtn.style.backgroundColor = "rgb(240, 84, 49)";
+        splitBtn.disabled = false;
+        resetBtn.disabled = false;
+
+        timeOperation = setInterval(() => {
+          helpertime += 10;
+          if (helpertime >= 1000) {
+            helpertime = 0;
+            milliseconds++;
+            if (milliseconds >= 10) {
+              milliseconds = 0;
+              seconds++;
+              if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes >= 60) {
+                  minutes = 0;
+                  hours++;
+                }
+              }
+            }
+          }
+
+          // Update display
+          helperTag.innerText = helpertime.toString().padStart(2, "0");
+          milliSecondsTag.innerText = milliseconds;
+          secondsTag.innerText = seconds.toString().padStart(2, "0");
+          minTag.innerText = minutes.toString().padStart(2, "0");
+          hrsTag.innerText = hours.toString().padStart(2, "0");
+        }, 10);
+
+      } else {
+        isPlaying = false;
+        clearInterval(timeOperation);
+        startBtn.innerText = "Start";
+        startBtn.style.backgroundColor = "rgb(78, 185, 185)";
+      }
+    }
+
+    function resetHandler() {
+      clearInterval(timeOperation);
+      hours = minutes = seconds = milliseconds = helpertime = 0;
+      hrsTag.innerText = "00";
+      minTag.innerText = "00";
+      secondsTag.innerText = "00";
+      milliSecondsTag.innerText = "0";
+      helperTag.innerText = "00";
+      splittedValues = [];
+      tbody.innerHTML = "";
+      table.style.visibility = "hidden";
+      startBtn.innerText = "Start";
+      startBtn.style.backgroundColor = "rgb(78, 185, 185)";
+      splitBtn.disabled = true;
+      resetBtn.disabled = true;
+      isStarted = false;
+    }
+
+    function splitValueHandler() {
+      table.style.visibility = "visible";
+
+      const currentTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds}`;
+      splittedValues.push(currentTime);
+      createTable();
+    }
+
+    function createTable() {
+      tbody.innerHTML = "";
+      let date = new Date();
+      let count = 0;
+
+      splittedValues.forEach((item, index) => {
+        count = isReversed ? splittedValues.length - index : index + 1;
+        tbody.innerHTML += `
+          <tr>
+            <td>${count}</td>
+            <td class="text-warning">${item}</td>
+            <td>${item}</td>
+            <td class="text-secondary">${date.toLocaleString()}</td>
+          </tr>`;
+      });
+    }
+
+    function reverseHandler() {
+      isReversed = !isReversed;
+      splittedValues.reverse();
+      createTable();
+    }
+  </script>
+</body>
+</html>
