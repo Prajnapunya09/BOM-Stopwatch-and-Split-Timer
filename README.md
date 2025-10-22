@@ -43,6 +43,5 @@ This project demonstrates the use of JavaScript timing events (`setInterval`, `c
 ## 📂 File Structure
 
 BOM_Stopwatch_Split_Timer/
-│
 ├── index.html       # Main file (HTML + CSS + JS combined)  
 ├── README.md        # Project documentation  
