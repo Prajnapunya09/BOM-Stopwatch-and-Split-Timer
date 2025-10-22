@@ -1,5 +1,7 @@
 # 🕒 BOM Stopwatch & Split Timer
 
+![Stopwatch Output](https://github.com/Prajnapunya09/BOM-Stopwatch-and-Split-Timer/blob/main/stopwatch%20output%20img.jpg)
+
 ## 📘 Project Overview
 The **BOM Stopwatch & Split Timer** is a JavaScript-based web application that uses the **Browser Object Model (BOM)** to simulate a stopwatch.  
 It allows users to **start**, **pause**, **reset**, and **record split times** with real-time updates.  
@@ -42,6 +44,6 @@ This project demonstrates the use of JavaScript timing events (`setInterval`, `c
 
 BOM_Stopwatch_Split_Timer/
 │
-├── index.html       # Main file (HTML + CSS + JS combined)
-├── README.md        # Project documentation
-└── assets/          # (Optional) Add screenshots or icons here
+├── index.html       # Main file (HTML + CSS + JS combined)  
+├── README.md        # Project documentation  
+└── assets/          # (Optional) Add screenshots or icons here  
