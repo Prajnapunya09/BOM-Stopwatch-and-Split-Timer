@@ -20,7 +20,3 @@ The **BOM Stopwatch & Split Timer** is a JavaScript-based web project that allow
 - **CSS3** – Styling  
 - **JavaScript (ES6)** – Functionality  
 
-## ⚙️ How to Run
-1. Clone this repository:  
-   ```bash
-   git clone https://github.com/Prajnapunya09/BOM-Stopwatch-and-Split-Timer.git
