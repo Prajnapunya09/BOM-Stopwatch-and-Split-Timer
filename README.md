@@ -18,5 +18,5 @@ The **BOM Stopwatch & Split Timer** is a JavaScript-based web project that allow
 ## 🧠 Technologies Used
 - **HTML5** – Structure  
 - **CSS3** – Styling  
-- **JavaScript (ES6)** – Functionality  
+- **JavaScript** – Functionality  
 
