@@ -3,7 +3,7 @@
 ## 📘  Project Overview
 The **BOM Stopwatch & Split Timer** is a JavaScript-based web project that allows users to start, stop, reset, and record split times with high accuracy. It’s designed with a clean UI and real-time timing updates for a seamless experience.
 
-## 🚀 Features
+## 🚀  Features
 - Start, Stop, and Reset the timer easily  
 - Record split times (laps) instantly  
 - Responsive and simple UI  
