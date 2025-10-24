@@ -15,7 +15,7 @@ The **BOM Stopwatch & Split Timer** is a JavaScript-based web project that allow
 ## 🎥 Output Video
 [▶️ Watch the Output Video](https://github.com/Prajnapunya09/BOM-Stopwatch-and-Split-Timer/blob/main/output%20video(stopwatch).mp4)
 
-## 🧠 Technologies Used
+## 🧠  Technologies Used
 - **HTML5** – Structure  
 - **CSS3** – Styling  
 - **JavaScript** – Functionality  
